@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PSL·Bridge Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg style="display:none">
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.6c2.6.3 4.5 2.2 4.5 4.9"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5C20 4.7 19.3 4 18.5 4H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5z"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M11 20V4M18 20v-7"/><path d="M2 20h20"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13"/><path d="M7 11l5 5 5-5"/><path d="M4 21h16"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 24 24"><path d="M7 4v16M3 8l4-4 4 4"/><path d="M17 20V4M13 16l4 4 4-4"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+  <symbol id="i-chevl" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+  <symbol id="i-chevr" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+  <symbol id="i-nest" viewBox="0 0 24 24"><path d="M9 6v6a3 3 0 0 0 3 3h9"/><path d="M15 9l6 6-6 6"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M9.5 20a2.5 2.5 0 0 0 5 0"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 20V7"/><path d="M7 12l5-5 5 5"/><path d="M4 21h16"/></symbol>
+  <symbol id="i-rollback" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 5v5h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 5-5"/></symbol>
+</svg>
+
+<div class="shell">
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="brand"><span class="dot"></span><span>PSL·Bridge admin</span></div>
+    <div class="nav-foot" style="order:99"><div class="av">M</div><div class="meta"><div>Maryam Yaqoob</div><div>Super admin</div></div></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div class="search"><svg width="14" height="14"><use href="#i-search"/></svg><input id="globalSearch" type="text" placeholder="Search users, logs, signs…" oninput="handleSearch(this.value)"></div>
+      <div class="right"><svg width="17" height="17"><use href="#i-bell"/></svg><div class="av">M</div></div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section id="sec-dashboard" class="active">
+      <div class="sec-head"><div><h2 class="title">Good morning, Maryam</h2><p class="subtitle">Here's what's happening across PSL-Bridge today</p></div></div>
+      <div class="stat-row" id="dashStats"></div>
+      <div class="two-col">
+        <div class="card"><h4>Daily user registrations</h4><canvas id="regChart"></canvas></div>
+        <div class="card"><h4>Most used feature</h4><canvas id="usageChart"></canvas></div>
+      </div>
+      <div class="card"><h4>Recent activity (audit log)</h4><div id="activityList"></div></div>
+    </section>
+
+    <!-- USERS -->
+    <section id="sec-users">
+      <div class="sec-head">
+        <div><h2 class="title">Users</h2><p class="subtitle">248 total · 231 active · 17 blocked</p></div>
+        <div class="btnrow"><button class="btn"><svg><use href="#i-download"/></svg>Download</button><button class="btn primary"><svg><use href="#i-plus"/></svg>Add user</button></div>
+      </div>
+      <div class="table-wrap"><table><thead><tr>
+        <th></th><th>SR#</th><th>Name</th><th>Email</th><th>Top module used</th><th>Last login</th><th>Status</th><th>Access</th><th>Actions</th>
+      </tr></thead><tbody id="usersBody"></tbody></table></div>
+      <div class="foot"><span>Showing 1–5 of 248</span><div class="pagi"><span class="pg"><svg width="12" height="12"><use href="#i-chevl"/></svg></span><span class="pg active">1</span><span class="pg">2</span><span class="pg">3</span><span class="pg"><svg width="12" height="12"><use href="#i-chevr"/></svg></span></div></div>
+      <p class="note">No hard "delete" anywhere — block/unblock (toggle) replaces delete everywhere, so history is never lost.</p>
+    </section>
+
+    <!-- TRANSLATIONS -->
+    <section id="sec-translations">
+      <div class="sec-head"><div><h2 class="title">Translation history</h2><p class="subtitle">Every Sign→Text and Text→Sign request, per user</p></div><button class="btn"><svg><use href="#i-download"/></svg>Export</button></div>
+      <div class="table-wrap"><table><thead><tr><th>SR#</th><th>User</th><th>Type</th><th>Result</th><th>Confidence</th><th>Date</th></tr></thead><tbody id="translationsBody"></tbody></table></div>
+    </section>
+
+    <!-- QUIZZES -->
+    <section id="sec-quizzes">
+      <div class="sec-head"><div><h2 class="title">Quiz management</h2><p class="subtitle">Attempts, average score and fail-rate per quiz</p></div><button class="btn primary"><svg><use href="#i-plus"/></svg>Add quiz</button></div>
+      <div class="sortbtns">
+        <button class="btn on" id="sortAttempts" onclick="sortQuizzes('attempts')"><svg><use href="#i-sort"/></svg>Most attempted</button>
+        <button class="btn" id="sortFail" onclick="sortQuizzes('failRate')"><svg><use href="#i-sort"/></svg>Most failed</button>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>SR#</th><th>Quiz</th><th>Category</th><th>Attempts</th><th>Avg score</th><th>Fail rate</th><th>Most missed question</th><th>Status</th><th>Actions</th></tr></thead><tbody id="quizzesBody"></tbody></table></div>
+      <p class="note">"Most failed" sorts by fail-rate — shows which quizzes are too hard, separate from "most missed question" which drills into one weak question.</p>
+    </section>
+
+    <!-- LIBRARY -->
+    <section id="sec-library">
+      <div class="sec-head"><div><h2 class="title">Learning library</h2><p class="subtitle">Signs, videos and categories</p></div><button class="btn primary"><svg><use href="#i-plus"/></svg>Add sign</button></div>
+      <div class="cat-grid" id="catGrid"></div>
+      <div class="table-wrap"><table><thead><tr><th>SR#</th><th>Sign</th><th>Category</th><th>Media</th><th>Status</th><th>Actions</th></tr></thead><tbody id="libraryBody"></tbody></table></div>
+    </section>
+
+    <!-- DATASET -->
+    <section id="sec-dataset">
+      <div class="sec-head"><div><h2 class="title">Dataset management</h2><p class="subtitle">Training data behind the recognition model</p></div>
+        <div class="btnrow"><button class="btn"><svg><use href="#i-download"/></svg>Export dataset</button><button class="btn primary"><svg><use href="#i-upload"/></svg>Upload videos</button></div>
+      </div>
+      <div class="stat-row n3">
+        <div class="card"><div class="lbl">Training videos</div><div class="val">1,240</div></div>
+        <div class="card"><div class="lbl">Labeled classes</div><div class="val">62</div></div>
+        <div class="card"><div class="lbl">Last updated</div><div class="val">18 Jul</div></div>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>SR#</th><th>Batch</th><th>Samples</th><th>Label</th><th>Uploaded</th><th>Included in training</th></tr></thead><tbody id="datasetBody"></tbody></table></div>
+      <p class="note">"Delete samples" replaced with an include/exclude toggle — a bad sample is excluded from training, not erased.</p>
+    </section>
+
+    <!-- MODEL -->
+    <section id="sec-model">
+      <div class="sec-head"><div><h2 class="title">AI model</h2><p class="subtitle">Current recognition model performance and history</p></div><button class="btn primary"><svg><use href="#i-upload"/></svg>Upload new model</button></div>
+      <div class="stat-row n5" id="modelStats"></div>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Accuracy</th><th>Trained on</th><th>Status</th><th>Actions</th></tr></thead><tbody id="modelBody"></tbody></table></div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section id="sec-feedback">
+      <div class="sec-head"><div><h2 class="title">Feedback &amp; issues</h2><p class="subtitle">What users are reporting, tagged by module so you know exactly where the problem is</p></div></div>
+      <div class="card" style="margin-bottom:16px"><h4>Issues by module</h4><canvas id="issuesChart"></canvas></div>
+      <div class="table-wrap"><table><thead><tr><th>SR#</th><th>User</th><th>Module</th><th>Issue</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody id="issuesBody"></tbody></table></div>
+    </section>
+
+    <!-- REPORTS -->
+    <section id="sec-reports">
+      <div class="sec-head"><div><h2 class="title">Reports</h2><p class="subtitle">Generate and export reports across every module</p></div></div>
+      <div class="report-grid" id="reportsGrid"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="sec-settings">
+      <div class="sec-head"><div><h2 class="title">Settings</h2></div></div>
+      <div class="card" id="settingsCard"></div>
+    </section>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
